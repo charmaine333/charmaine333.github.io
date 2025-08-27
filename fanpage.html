@@ -1,0 +1,783 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Justin Bieber Fanpage — Unofficial</title>
+  <style>
+    :root {
+      --bg: #0f011a;
+      --card: #1a0b2e;
+      --muted: #c6b3f7;
+      --text: #f3e8ff;
+      --accent: #a855f7;
+      --accent-2: #c084fc;
+      --ring: #4b0082;
+      --gradient-1: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      --gradient-2: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+      --gradient-3: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+    }
+
+    * { box-sizing: border-box; }
+    html, body { height: 100%; margin:0; font-family: 'Inter', system-ui, sans-serif; color: var(--text); scroll-behavior: smooth; }
+    body { 
+      background: radial-gradient(1200px 600px at 10% -10%, #2a0f3b 0, var(--bg) 55%),
+                  radial-gradient(800px 600px at 90% -20%, #4b0082 0, var(--bg) 60%), var(--bg); 
+      background-attachment: fixed;
+      animation: subtleGlow 8s ease-in-out infinite alternate;
+    }
+
+    @keyframes subtleGlow {
+      0% { filter: brightness(1); }
+      100% { filter: brightness(1.05); }
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-10px); }
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+    }
+
+    @keyframes shimmer {
+      0% { background-position: -200% 0; }
+      100% { background-position: 200% 0; }
+    }
+
+    a { color: var(--accent); text-decoration: none; transition: all 0.3s ease; }
+    a:hover { text-decoration: underline; color: var(--accent-2); }
+
+    /* Header / Banner */
+    .header {
+      position: relative; padding: 72px 20px 32px; text-align: center; overflow: hidden;
+      border-bottom: 1px solid var(--ring); color: var(--text);
+      background: linear-gradient(45deg, #1a0b2e, #2d1b4e, #1a0b2e);
+      background-size: 400% 400%;
+      animation: gradientShift 6s ease infinite;
+    }
+
+    @keyframes gradientShift {
+      0%, 100% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+    }
+
+    .header::before {
+      content: "";
+      position: absolute;
+      inset: -20% -10% 0 -10%;
+      background: radial-gradient(60% 50% at 50% -10%, rgba(168,85,247,.35), transparent 60%),
+                  radial-gradient(40% 30% at 20% 10%, rgba(192,132,252,.25), transparent 60%);
+      filter: blur(30px);
+      z-index: 0;
+    }
+
+    .brand {
+      position: relative; display: inline-flex; align-items: center; gap: 12px;
+      padding: 10px 16px; background: rgba(26,11,46,.8); border: 1px solid var(--ring); 
+      border-radius: 999px; backdrop-filter: blur(10px);
+      animation: float 3s ease-in-out infinite;
+      transition: all 0.3s ease;
+    }
+
+    .brand:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 20px 40px rgba(168,85,247,.6);
+    }
+
+    .brand .logo {
+      width: 40px; height: 40px; border-radius: 10px;
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      box-shadow: 0 10px 30px rgba(168,85,247,.4);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .brand .logo::before {
+      content: "";
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: linear-gradient(45deg, transparent, rgba(255,255,255,0.3), transparent);
+      animation: shimmer 2s infinite;
+    }
+
+    .brand .name { font-weight: 700; letter-spacing: .4px; }
+
+    .banner-title { 
+      font-size: clamp(32px,6vw,52px); margin: 18px 0 6px; 
+      text-shadow: 0 0 20px var(--accent), 0 0 40px var(--accent);
+      background: linear-gradient(135deg, #f093fb, #f5576c, #4facfe);
+      background-clip: text;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: pulse 2s ease-in-out infinite;
+    }
+    .banner-sub { color: var(--muted); margin:0 auto; max-width:800px; }
+
+    /* Nav */
+    .nav {
+      display:flex; gap:10px; justify-content:center; flex-wrap:wrap;
+      padding:18px 16px 28px; position:sticky; top:0; z-index:10;
+      background: linear-gradient(to bottom, rgba(15,1,26,.95), rgba(15,1,26,.8));
+      backdrop-filter: blur(12px); border-bottom:1px solid var(--ring);
+    }
+    .nav a {
+      padding:12px 18px; border-radius:999px; border:1px solid transparent;
+      transition: all 0.3s ease; position: relative; overflow: hidden;
+    }
+    .nav a::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: var(--gradient-1);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      z-index: -1;
+    }
+    .nav a:hover { 
+      border-color: var(--accent); 
+      transform: translateY(-2px);
+      box-shadow: 0 10px 20px rgba(168,85,247,.3);
+    }
+    .nav a:hover::before { opacity: 0.2; }
+
+    /* Layout */
+    .container { width:min(1100px, 92%); margin:0 auto; padding:28px 0 64px; }
+    .grid { display:grid; gap:20px; grid-template-columns:1.1fr .9fr; }
+    @media (max-width:900px) { .grid { grid-template-columns:1fr; } }
+
+    .card {
+      background: linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.02));
+      border:1px solid var(--ring); border-radius:20px; padding:20px;
+      box-shadow: 0 15px 35px rgba(168,85,247,.15);
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 2px;
+      background: var(--gradient-1);
+      transition: left 0.5s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 20px 50px rgba(168,85,247,.25);
+      border-color: var(--accent);
+    }
+
+    .card:hover::before {
+      left: 100%;
+    }
+
+    .card h2 { margin:2px 0 12px; font-size:22px; }
+    .muted { color: var(--muted); }
+    .chip { 
+      display:inline-block; padding:6px 12px; border-radius:999px; 
+      border:1px solid var(--ring); color: var(--text); font-size:12px; 
+      background: var(--gradient-2); font-weight: 600;
+      animation: pulse 3s ease-in-out infinite;
+    }
+
+    /* Featured */
+    .featured {
+      display:grid; gap:16px; align-items:start;
+      grid-template-columns:160px 1fr; min-height:140px;
+    }
+    @media(max-width:600px){ .featured{grid-template-columns:1fr;} }
+    .featured .thumb { 
+      aspect-ratio:1.3/1; border-radius:15px; border:2px solid var(--accent); 
+      background: var(--gradient-3); 
+      box-shadow:0 0 25px var(--accent);
+      animation: float 4s ease-in-out infinite;
+    }
+
+    /* News list */
+    .news { display:grid; gap:16px; }
+    .post { 
+      display:grid; gap:14px; grid-template-columns:96px 1fr; 
+      padding: 12px; border-radius: 12px; 
+      transition: all 0.3s ease;
+    }
+    .post:hover {
+      background: rgba(255,255,255,0.05);
+      transform: translateX(5px);
+    }
+    .post .img { 
+      background: var(--gradient-2); border:2px solid var(--ring); 
+      border-radius:12px; aspect-ratio:1/1; 
+      box-shadow:0 0 15px var(--accent);
+      transition: all 0.3s ease;
+    }
+    .post:hover .img {
+      transform: rotate(5deg) scale(1.1);
+      box-shadow:0 0 25px var(--accent);
+    }
+    .post h3 { margin:0 0 6px; font-size:16px; }
+
+    /* Gallery */
+    .gallery { display:grid; grid-template-columns:repeat(4,1fr); gap:12px; }
+    .ph { 
+      aspect-ratio:1/1; border-radius:15px; border:2px solid var(--accent); 
+      background: var(--gradient-1); 
+      box-shadow:0 0 20px var(--accent-2);
+      transition: all 0.4s ease;
+      cursor: pointer;
+    }
+    .ph:hover {
+      transform: scale(1.05) rotate(2deg);
+      box-shadow:0 0 30px var(--accent);
+      border-color: var(--accent-2);
+    }
+    @media(max-width:900px){ .gallery{grid-template-columns:repeat(3,1fr);} }
+    @media(max-width:600px){ .gallery{grid-template-columns:repeat(2,1fr);} }
+
+    /* Community */
+    .stack { display:grid; gap:14px; }
+    .field { display:grid; gap:8px; }
+    
+    input[type="text"], textarea, select {
+      width:100%; padding:12px 14px; border-radius:12px;
+      background: rgba(26,11,46,0.8); border:1px solid var(--ring); color: var(--text);
+      transition: all 0.3s ease;
+    }
+    
+    input[type="text"]:focus, textarea:focus, select:focus {
+      outline: none;
+      border-color: var(--accent);
+      box-shadow: 0 0 20px rgba(168,85,247,.3);
+      background: rgba(26,11,46,1);
+    }
+
+    textarea { min-height:110px; resize: vertical; }
+    
+    .btn {
+      display:inline-block; padding:12px 18px; border-radius:15px; border:2px solid var(--accent);
+      background: var(--gradient-1);
+      color: var(--text); cursor:pointer; 
+      box-shadow:0 0 20px var(--accent);
+      transition: all 0.3s ease;
+      font-weight: 600;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .btn::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+      transition: left 0.5s ease;
+    }
+
+    .btn:hover { 
+      transform: translateY(-3px) scale(1.05);
+      box-shadow:0 15px 35px var(--accent);
+      border-color: var(--accent-2);
+    }
+
+    .btn:hover::before {
+      left: 100%;
+    }
+
+    /* Enhanced Poll Styling */
+    .poll-container {
+      background: linear-gradient(135deg, rgba(168,85,247,0.1), rgba(192,132,252,0.05));
+      border-radius: 16px;
+      padding: 20px;
+      border: 1px solid var(--accent);
+    }
+
+    .poll-option {
+      display: block;
+      margin-bottom: 10px;
+      cursor: pointer;
+      padding: 12px 16px;
+      border-radius: 12px;
+      border: 1px solid transparent;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .poll-option::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: var(--gradient-2);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      z-index: -1;
+    }
+
+    .poll-option:hover {
+      border-color: var(--accent);
+      transform: translateX(5px);
+    }
+
+    .poll-option:hover::before {
+      opacity: 0.2;
+    }
+
+    .poll-option.selected {
+      background: rgba(168,85,247,0.3);
+      border-color: var(--accent);
+      box-shadow: 0 0 20px rgba(168,85,247,0.4);
+    }
+
+    .poll-option.selected::before {
+      opacity: 0.4;
+    }
+
+    input[type="radio"] {
+      margin-right: 10px;
+      transform: scale(1.2);
+    }
+
+    .vote-btn {
+      margin-top: 15px;
+      padding: 12px 20px;
+      border-radius: 15px;
+      border: 2px solid var(--accent);
+      background: var(--gradient-1);
+      color: white;
+      cursor: pointer;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .vote-btn::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(45deg, transparent, rgba(255,255,255,0.3), transparent);
+      transform: translateX(-100%);
+      transition: transform 0.6s ease;
+    }
+
+    .vote-btn:hover {
+      transform: translateY(-3px) scale(1.05);
+      box-shadow: 0 15px 30px rgba(168,85,247,0.4);
+    }
+
+    .vote-btn:hover::before {
+      transform: translateX(100%);
+    }
+
+    .success-message {
+      margin-top: 15px;
+      padding: 12px 16px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, rgba(34, 197, 94, 0.2), rgba(34, 197, 94, 0.1));
+      border: 1px solid rgba(34, 197, 94, 0.3);
+      color: #22c55e;
+      display: none;
+      animation: slideIn 0.5s ease;
+    }
+
+    @keyframes slideIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Enhanced Shoutouts */
+    .shoutout-form {
+      background: linear-gradient(135deg, rgba(192,132,252,0.1), rgba(122,162,255,0.05));
+      border-radius: 16px;
+      padding: 20px;
+      border: 1px solid var(--ring);
+    }
+
+    /* Floating particles */
+    .particle {
+      position: fixed;
+      width: 4px;
+      height: 4px;
+      background: var(--accent);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 1;
+      animation: floatUp 6s linear infinite;
+    }
+
+    @keyframes floatUp {
+      0% { opacity: 0; transform: translateY(100vh) scale(0); }
+      10% { opacity: 1; transform: translateY(90vh) scale(1); }
+      90% { opacity: 1; transform: translateY(10vh) scale(1); }
+      100% { opacity: 0; transform: translateY(0) scale(0); }
+    }
+
+    /* Footer */
+    footer { 
+      border-top:1px solid var(--ring); margin-top:40px; padding:24px 0 60px; 
+      text-align:center; color: var(--muted);
+      background: linear-gradient(45deg, rgba(26,11,46,0.8), rgba(75,0,130,0.2));
+    }
+    .socials { display:flex; justify-content:center; gap:16px; margin:12px 0 16px; }
+    .socials a { 
+      border:2px solid var(--ring); padding:8px 12px; border-radius:999px; 
+      color: var(--text); box-shadow:0 0 15px var(--accent);
+      transition: all 0.3s ease;
+    }
+    .socials a:hover {
+      transform: translateY(-3px) scale(1.1);
+      border-color: var(--accent);
+      box-shadow:0 0 25px var(--accent);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Floating Particles -->
+  <div id="particles"></div>
+
+  <!-- HEADER / BANNER -->
+  <header class="header" id="top">
+    <!-- Background Image -->
+    <header style="position: relative; width: 100%; text-align: center; background-color: #3a0d60;">
+        <!-- Banner image (keeps full image visible) -->
+        <img src="justin1.jpg" alt="Justin Bieber Banner" style="
+          width: 100%;
+          height: auto; /* ensures entire image is visible */
+          display: block;
+        ">
+      
+        <!-- Text overlay -->
+        <div style="
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          color: white;
+          text-shadow: 0 0 10px purple;
+          width: 90%;
+        ">
+      
+        <!-- Text on top -->
+        
+          <h4 class="banner-title">Justin Bieber Fanpage</h4>
+          <strong><p class="banner-sub">Welcome to the ultimate Belieber destination! ✨</p></strong>
+        </header>
+      
+    
+    
+
+  <!-- NAV -->
+  <nav class="nav" aria-label="Primary">
+    <a href="#featured">Home</a>
+    <a href="#about">About</a>
+    <a href="#news">News</a>
+    <a href="#gallery">Gallery</a>
+    <a href="#community">Community</a>
+    <a href="#contact">Contact</a>
+  </nav>
+
+  <main class="container">
+    <div class="grid">
+  
+      <!-- LEFT COLUMN -->
+      <section class="card" id="featured" aria-labelledby="featured-title">
+        <span class="chip">✨ Featured</span>
+        <div class="featured" style="margin-top:12px;">
+          <div class="thumb" role="img" aria-label="Featured Justin photo"
+               style="background-image: url('justin6.jpg'); 
+                      background-size: cover; 
+                      background-position: center;">
+          </div>
+          <div>
+            <h2 id="featured-title">New Era Begins — World Tour Announced</h2>
+            <p class="muted">Posted Aug 21, 2025 • 3 min read</p>
+            <p>Justin Bieber just announced a global tour! Dates across Asia, Europe, and the Americas. Stay tuned for tickets, setlists, and fan meetups! 🎤</p>
+            <p><a href="#news">Read more updates →</a></p>
+          </div>
+        </div>
+      </section>
+  
+
+      <aside class="card" id="about" aria-labelledby="about-title">
+        <h2 id="about-title">About This Fanpage</h2>
+        <p>This fanpage celebrates <strong>Justin Bieber</strong> — collecting news, curating photos, and connecting Beliebers worldwide. 💜</p>
+        
+        <div style="margin-top: 16px; display: flex; flex-direction: column; gap: 8px;">
+          <div style="display: flex; align-items: center; gap: 8px;">
+            <span>🎯</span>
+            <strong>Mission:</strong> To see Justin Bieber hehe
+          </div>
+          <div style="display: flex; align-items: center; gap: 8px;">
+            <span>🖼️</span>
+            <strong>Gallery:</strong> Photographs of Justin
+          </div>
+          <div style="display: flex; align-items: center; gap: 8px;">
+            <span>🤝</span>
+            <strong>Community:</strong> Polls, shoutouts, and stories
+          </div>
+        </div>
+      </aside>
+      
+
+      <!-- NEWS & UPDATES -->
+      <section class="card" id="news" aria-labelledby="news-title">
+        <h2 id="news-title">📰 News & Updates</h2>
+        <div class="news">
+          <article class="post">
+            <div class="img" role="img" aria-label="Studio photo"
+                 style="background-image: url('justin4.jpg'); 
+                        background-size: cover; 
+                        background-position: center;">
+            </div>
+            <div>
+              <h3>Behind the Scenes: Studio Session Sneak Peek</h3>
+              <p class="muted">Aug 18, 2025</p>
+              <p>Fans spotted analog synths and a string quartet for his upcoming release. 🎹</p>
+            </div>
+          </article>
+          <article class="post">
+            <div class="img" role="img" aria-label="Charity livestream"
+                 style="background-image: url('justin5.jpg'); 
+                        background-size: cover; 
+                        background-position: center;">
+            </div>
+            <div>
+              <h3>Charity Collab Raises $250k</h3>
+              <p class="muted">Aug 12, 2025</p>
+              <p>Livestream exceeded expectations, benefiting youth arts programs. 💝</p>
+            </div>
+          </article>
+        </div>
+      </section>
+      
+
+      <!-- GALLERY -->
+      <section class="card" id="gallery" aria-labelledby="gallery-title">
+        <h2 id="gallery-title">📸 Gallery</h2>
+        <div class="gallery" aria-label="Photo grid">
+            <div class="ph" role="img" aria-label="Justin photo 1">
+                <img src="justin1.jpg" alt="Justin photo 1" style="width:100%; height:100%; border-radius:12px; object-fit:cover;">
+              </div>
+              <div class="ph" role="img" aria-label="Justin photo 1">
+                <img src="justin2.jpg" alt="Justin photo 2" style="width:100%; height:100%; border-radius:12px; object-fit:cover;">
+              </div>
+              <div class="ph" role="img" aria-label="Justin photo 1">
+                <img src="justin3.jpg" alt="Justin photo 3" style="width:100%; height:100%; border-radius:12px; object-fit:cover;">
+              </div>
+              <div class="ph" role="img" aria-label="Justin photo 1">
+                <img src="justin4.jpg" alt="Justin photo 4" style="width:100%; height:100%; border-radius:12px; object-fit:cover;">
+              </div>
+              <div class="ph" role="img" aria-label="Justin photo 1">
+                <img src="justin5.jpg" alt="Justin photo 5" style="width:100%; height:100%; border-radius:12px; object-fit:cover;">
+              </div>
+              <div class="ph" role="img" aria-label="Justin photo 1">
+                <img src="justin6.jpg" alt="Justin photo 6" style="width:100%; height:100%; border-radius:12px; object-fit:cover;">
+              </div>
+              
+              
+              
+              
+              
+        </div>
+      </section>
+
+      <!-- COMMUNITY POLL -->
+      <section class="card" id="community" aria-labelledby="community-title">
+        <h2 id="community-title">🗳️ Community Poll</h2>
+        <div class="poll-container">
+          <strong>Current Poll:</strong>
+          <p class="muted" style="margin: 8px 0 15px;">Which Justin Bieber era is your favorite?</p>
+          <form id="pollForm">
+            <label class="poll-option" style="display: flex; align-items: center; margin-bottom: 8px; cursor: pointer;">
+              <input type="radio" name="era" value="Debut Era" style="margin-right: 8px;">
+              <span>🌟 Debut Era (Baby, One Less Lonely Girl)</span>
+            </label>
+            <label class="poll-option" style="display: flex; align-items: center; margin-bottom: 8px; cursor: pointer;">
+              <input type="radio" name="era" value="World Tour Era" style="margin-right: 8px;">
+              <span>🌍 World Tour Era (Sorry, Love Yourself)</span>
+            </label>
+            <label class="poll-option" style="display: flex; align-items: center; margin-bottom: 8px; cursor: pointer;">
+              <input type="radio" name="era" value="Acoustic Era" style="margin-right: 8px;">
+              <span>🎸 Acoustic Era (Changes, Justice)</span>
+            </label>
+            <button type="submit" class="vote-btn">Cast Your Vote! 🗳️</button>
+          </form>
+          <div id="successMessage" class="success-message">
+            ✅ Thanks for voting! Your choice: <strong><span id="selectedChoice"></span></strong>
+          </div>
+        </div>
+      </section>            
+
+      <!-- SHOUTOUTS -->
+      <section class="card" id="contact">
+        <h2>💬 Belieber Shoutouts</h2>
+        <div class="shoutout-form">
+          <strong>Send a message to the fandom:</strong>
+          <p class="muted" style="margin:8px 0 15px;">Share your love for JB with fellow Beliebers!</p>
+          <form class="stack" id="shoutoutForm">
+            <div class="field">
+              <label for="name">Your Name</label>
+              <input id="name" type="text" placeholder="Enter your name" />
+            </div>
+            <div class="field">
+              <label for="message">Message</label>
+              <textarea id="message" placeholder="What do you want to say to the Belieber community?"></textarea>
+            </div>
+            <button type="submit" class="btn">Send Shoutout! 💜</button>
+          </form>
+          <div id="shoutoutSuccess" class="success-message">
+            ✨ Your shoutout has been sent to the Belieber community!
+          </div>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="socials">
+      <a href="#" aria-label="Twitter">🐦 Twitter</a>
+      <a href="#" aria-label="Instagram">📷 Instagram</a>
+      <a href="#" aria-label="YouTube">📺 YouTube</a>
+      <a href="#" aria-label="TikTok">🎵 TikTok</a>
+    </div>
+    <p>&copy; 2025 Unofficial Justin Bieber Fanpage. Made with 💜 by Beliebers.</p>
+    <p class="muted" style="font-size:12px;">Not affiliated with Justin Bieber or his official team.</p>
+  </footer>
+
+  <script>
+    // Interactive Poll Functionality
+    const pollForm = document.getElementById('pollForm');
+    const pollOptions = document.querySelectorAll('.poll-option');
+    const radioButtons = document.querySelectorAll('input[name="era"]');
+    const successMessage = document.getElementById('successMessage');
+    const selectedChoice = document.getElementById('selectedChoice');
+
+    // Handle radio button selection with visual feedback
+    radioButtons.forEach((radio, index) => {
+      radio.addEventListener('change', function() {
+        // Remove selected class from all options
+        pollOptions.forEach(option => option.classList.remove('selected'));
+        
+        // Add selected class to current option
+        if (this.checked) {
+          pollOptions[index].classList.add('selected');
+        }
+      });
+    });
+
+    // Handle poll submission
+    pollForm.addEventListener('submit', function(e) {
+      e.preventDefault();
+      
+      const selectedOption = document.querySelector('input[name="era"]:checked');
+      
+      if (selectedOption) {
+        selectedChoice.textContent = selectedOption.value;
+        successMessage.style.display = 'block';
+        
+        // Scroll success message into view
+        successMessage.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        
+        // Add celebration effect to submit button
+        const submitBtn = this.querySelector('.vote-btn');
+        submitBtn.style.background = 'linear-gradient(135deg, #22c55e, #16a34a)';
+        submitBtn.textContent = '✅ Voted!';
+        
+        // Reset after 3 seconds
+        setTimeout(() => {
+          submitBtn.style.background = '';
+          submitBtn.textContent = 'Cast Your Vote! 🗳️';
+        }, 3000);
+        
+      } else {
+        alert('Please select an era before voting! 🎵');
+      }
+    });
+
+    // Interactive Shoutout Form
+    const shoutoutForm = document.getElementById('shoutoutForm');
+    const shoutoutSuccess = document.getElementById('shoutoutSuccess');
+
+    shoutoutForm.addEventListener('submit', function(e) {
+      e.preventDefault();
+      
+      const name = document.getElementById('name').value.trim();
+      const message = document.getElementById('message').value.trim();
+      
+      if (name && message) {
+        shoutoutSuccess.style.display = 'block';
+        shoutoutSuccess.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        
+        // Clear form
+        this.reset();
+        
+        // Button effect
+        const submitBtn = this.querySelector('.btn');
+        submitBtn.style.background = 'linear-gradient(135deg, #22c55e, #16a34a)';
+        submitBtn.textContent = '✅ Sent!';
+        
+        setTimeout(() => {
+          submitBtn.style.background = '';
+          submitBtn.textContent = 'Send Shoutout! 💜';
+          shoutoutSuccess.style.display = 'none';
+        }, 4000);
+        
+      } else {
+        alert('Please fill in both your name and message! 💭');
+      }
+    });
+
+    // Create floating particles
+    function createParticle() {
+      const particle = document.createElement('div');
+      particle.className = 'particle';
+      particle.style.left = Math.random() * 100 + 'vw';
+      particle.style.animationDelay = Math.random() * 6 + 's';
+      particle.style.animationDuration = (6 + Math.random() * 4) + 's';
+      document.getElementById('particles').appendChild(particle);
+      
+      // Remove particle after animation
+      setTimeout(() => {
+        particle.remove();
+      }, 10000);
+    }
+
+    // Create particles periodically
+    setInterval(createParticle, 3000);
+
+    // Gallery hover effects
+    document.querySelectorAll('.ph').forEach(photo => {
+      photo.addEventListener('click', function() {
+        this.style.animation = 'pulse 0.6s ease';
+        setTimeout(() => {
+          this.style.animation = '';
+        }, 600);
+      });
+    });
+
+    // Smooth scrolling for navigation
+    document.querySelectorAll('.nav a').forEach(link => {
+      link.addEventListener('click', function(e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({ behavior: 'smooth' });
+        }
+      });
+    });
+
+    // Add some initial particles
